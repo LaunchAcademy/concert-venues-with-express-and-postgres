@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
 
-const NewConcertVenueForm = props => {
+const NewConcertVenueForm = (props) => {
   const [shouldRedirect, setShouldRedirect] = useState(false)
   const [newVenue, setNewVenue] = useState({
     name: "",
@@ -9,14 +9,14 @@ const NewConcertVenueForm = props => {
     capacity: ""
   })
 
-  const handleInputChange = event => {
+  const handleInputChange = (event) => {
     setNewVenue({
       ...newVenue,
       [event.currentTarget.name]: event.currentTarget.value
     })
   }
 
-  const postNewVenue = async event => {
+  const postNewVenue = async (event) => {
     event.preventDefault()
 
     try {
@@ -33,6 +33,7 @@ const NewConcertVenueForm = props => {
         const error = new Error(errorMessage)
         throw error
       }
+      console.log("newly created concert venue:", body.concertVenue)
       console.log("New Concert Venue was added successfully!")
       setShouldRedirect(true)
     } catch (err) {
@@ -50,7 +51,12 @@ const NewConcertVenueForm = props => {
       <form onSubmit={postNewVenue}>
         <label>
           Name
-          <input type="text" name="name" onChange={handleInputChange} value={newVenue.name} />
+          <input
+            type="text"
+            name="name"
+            onChange={handleInputChange}
+            value={newVenue.name}
+          />
         </label>
         <label>
           Location

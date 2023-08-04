@@ -15,6 +15,8 @@ const ConcertVenuesList = () => {
         throw error
       }
       const body = await response.json()
+      // console.log("body from fetch", body)
+      // debugger
       setConcertVenues(body.concertVenues)
     } catch (err) {
       console.error(`Error in fetch: ${err.message}`)
@@ -25,9 +27,17 @@ const ConcertVenuesList = () => {
     getConcertVenues()
   }, [])
 
-  const concertVenueTiles = concertVenues.map(concertVenueObject => {
+  // console.log("state", concertVenues)
+  const concertVenueTiles = concertVenues.map((concertVenueObject) => {
     const { id, name, location, capacity } = concertVenueObject
-    return <ConcertVenueTile key={id} name={name} location={location} capacity={capacity} />
+    return (
+      <ConcertVenueTile
+        key={id}
+        name={name}
+        location={location}
+        capacity={capacity}
+      />
+    )
   })
 
   return (
